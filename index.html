@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <title>Galactic Center Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Galactic Center Tracker</h1>
+
+        <div class="display">
+            <div id="lst">LST: --:--:--</div>
+            <div id="position">Altitude: --°, Azimuth: --°</div>
+        </div>
+
+        <div class="inputs">
+            <label>
+                Latitude:
+                <input type="number" id="latitude" step="0.0001" value="29.7604">
+            </label>
+            <label>
+                Longitude:
+                <input type="number" id="longitude" step="0.0001" value="-95.3698">
+            </label>
+            <button id="updateBtn" class="updateBtn">Update Location</button>
+            <button id="gpsBtn" class="updateBtn">Use My Location</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
