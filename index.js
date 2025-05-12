@@ -130,7 +130,7 @@ document.getElementById('gpsBtn').addEventListener('click', () => {
 
 function loadEffectImage(callback) {
     effectImage = new Image();
-    effectImage.src = 'RV Effect_binary.png'; // Assuming it's in same directory
+    effectImage.src = 'images/RV Effect_binary.png'; // Assuming it's in same directory
     effectImage.crossOrigin = "Anonymous"; // Allow pixel reading
 
     effectImage.onload = () => {
