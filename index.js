@@ -175,16 +175,14 @@ function precomputeBlackPixelCounts() {
 
 function getEffectPercentAtLST(LST_decimal) {
     if (!imageLoaded) {
-        console.error("Effect image not loaded yet!");
         loadEffectImage(true);
-        return null;
     }
 
     const imgWidth = canvas.width;
     const imgHeight = canvas.height;
 
     const x = Math.floor((LST_decimal / 24) * imgWidth);
-    const clampedX = Math.min(Math.max(x, 0), imgWidth - 1); // Clamp safely
+    const clampedX = Math.min(Math.max(x, 0), imgWidth - 1);
 
     const blackPixelCount = blackPixelCounts[clampedX];
     const fractionBlack = blackPixelCount / imgHeight;
