@@ -1,9 +1,18 @@
 [
-    "collosseum.png",
-    "durdel-door.png",
-    "stanserhorn-swiss-alps.png",
-    "Statue-of-Liberty.png",
-    "stonehenge.png",
-    "tepui-venezuela.png"
+    { "filename": "collosseum.png", "tags": ["manmade"] },
+    { "filename": "durdel-door.png", "tags": ["natural"] },
+    { "filename": "stanserhorn-swiss-alps.png", "tags": ["natural"] },
+    { "filename": "Statue-of-Liberty.png", "tags": ["manmade"] },
+    { "filename": "stonehenge.png", "tags": ["manmade"] },
+    { "filename": "tepui-venezuela.png", "tags": ["natural"] },
+    { "filename": "black-bridge.png", "tags": ["manmade"] },
+    { "filename": "Chichen-Itza.png", "tags": ["manmade"] },
+    { "filename": "cologne-cathedral.png", "tags": ["manmade"] },
+    { "filename": "delicate-arch.png", "tags": ["natural"] },
+    { "filename": "easter-island-heads.png", "tags": ["manmade"] },
+    { "filename": "horseshoe-bend.png", "tags": ["natural"] },
+    { "filename": "iguazu-falls.png", "tags": ["natural"] },
+    { "filename": "segovia-aqueduct.png", "tags": ["manmade"] },
+    { "filename": "white-cliffs-of-dover.png", "tags": ["natural"] }
 ]
   
