@@ -101,3 +101,44 @@ body {
     transition: filter 0.4s ease;
   }
   
+  .dropdown-wrapper {
+    margin: 10px 0;
+    position: relative;
+  }
+  
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    border: 1px solid #666;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+    width: 200px;
+  }
+  
+  .dropdown-content label {
+    display: block;
+    color: #eee;
+    margin: 2px 0;
+  }
+  
+  .dropdown.open .dropdown-content {
+    display: block;
+  }
+  
+  #tagDropdownToggle {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  

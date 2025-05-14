@@ -1,22 +1,76 @@
 const imageFolder = 'images/arv/'; // Folder where PNG images are stored
 
+let availableImagesCache = [];
+
 async function fetchImageListFromServer() {
   const response = await fetch(`${imageFolder}list.json`);
   if (!response.ok) {
     throw new Error('Failed to load image list');
   }
   const files = await response.json();
-  return files.filter(file => file.toLowerCase().endsWith('.png'));
+  availableImagesCache = files.filter(file => file.filename.toLowerCase().endsWith('.png'));
+  return availableImagesCache;
+}
+
+function populateTagDropdown(tags) {
+    const tagDropdown = document.getElementById('tagDropdown');
+    const tagToggle = document.getElementById('tagDropdownToggle');
+    const tagOptions = document.getElementById('tagOptions');
+  
+    tagOptions.innerHTML = '';
+    tags.sort().forEach(tag => {
+      const label = document.createElement('label');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.name = 'tagFilter';
+      checkbox.value = tag;
+      checkbox.addEventListener('change', () => {
+        loadImageFilenames(parseInt(document.getElementById('imageCount').value, 10));
+      });
+      label.appendChild(checkbox);
+      label.append(` ${tag}`);
+      tagOptions.appendChild(label);
+    });
+  
+    // Attach toggle
+    tagToggle.onclick = (e) => {
+      e.stopPropagation(); // prevent document click from closing it instantly
+      tagDropdown.classList.toggle('open');
+    };
+  
+    // Close dropdown if clicking outside
+    document.addEventListener('click', (e) => {
+      if (!tagDropdown.contains(e.target)) {
+        tagDropdown.classList.remove('open');
+      }
+    });
+  }   
+
+  function getSelectedTags() {
+    const checkboxes = document.querySelectorAll('input[name="tagFilter"]:checked');
+    return Array.from(checkboxes).map(checkbox => checkbox.value);
+  }
+
+function updatePoolSizeDisplay(filteredImages) {
+  const poolSizeDisplay = document.getElementById('poolSize');
+  poolSizeDisplay.textContent = `Target pool size: ${filteredImages.length}`;
 }
 
 async function loadImageFilenames(count) {
-  const availableImages = await fetchImageListFromServer();
-  const shuffled = availableImages.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, count).map((filename, index) => ({
-    src: imageFolder + filename,
+  const availableImages = availableImagesCache.length ? availableImagesCache : await fetchImageListFromServer();
+  const selectedTags = getSelectedTags();
+  const filteredImages = selectedTags.length === 0 ? availableImages : availableImages.filter(img => {
+    return img.tags && img.tags.some(tag => selectedTags.includes(tag));
+  });
+
+  updatePoolSizeDisplay(filteredImages);
+
+  const shuffled = filteredImages.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, count).map((image, index) => ({
+    src: imageFolder + image.filename,
     index: index + 1
   }));
-  return selected.sort(() => 0.5 - Math.random()); // shuffle again for display order
+  return selected.sort(() => 0.5 - Math.random());
 }
 
 function createImageGrid(images) {
@@ -72,9 +126,8 @@ function createImageGrid(images) {
   });
 }
 
-// Set up listener
+window.addEventListener('DOMContentLoaded', async () => {
 
-window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loadImages').addEventListener('click', async () => {
     const count = parseInt(document.getElementById('imageCount').value, 10);
     try {
@@ -84,4 +137,14 @@ window.addEventListener('DOMContentLoaded', () => {
       alert('Error loading images: ' + err.message);
     }
   });
+
+  try {
+    const images = await fetchImageListFromServer();
+    const allTags = new Set();
+    images.forEach(img => img.tags && img.tags.forEach(tag => allTags.add(tag)));
+    populateTagDropdown(Array.from(allTags));
+    updatePoolSizeDisplay(images);
+  } catch (err) {
+    console.error(err);
+  }
 });
