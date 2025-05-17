@@ -175,7 +175,10 @@ function precomputeBlackPixelCounts() {
 
 function getEffectPercentAtLST(LST_decimal) {
     if (!imageLoaded) {
-        loadEffectImage(true);
+        loadEffectImage();
+        if (!imageLoaded) {
+            return 0;
+        }
     }
 
     const imgWidth = canvas.width;
