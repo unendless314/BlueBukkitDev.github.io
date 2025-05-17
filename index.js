@@ -7,6 +7,9 @@ const RA_GALACTIC_CENTER = 266.4167; // degrees
 const DEC_GALACTIC_CENTER = -29.0078; // degrees
 let blackPixelCounts = []; // array of black pixel counts per column of graph
 let imageLoaded = false;
+let canvas = null;
+let ctx = null;
+let effectImage = null;
 
 
 function degToRad(degrees) {
@@ -144,7 +147,9 @@ function loadEffectImage(callback) {
         // Precompute black pixel counts for each column
         precomputeBlackPixelCounts();
 
-        if (callback) callback();
+        if (typeof callback === 'function') {
+            callback();
+        }
     };
 }
 
@@ -175,7 +180,8 @@ function precomputeBlackPixelCounts() {
 
 function getEffectPercentAtLST(LST_decimal) {
     if (!imageLoaded) {
-        loadEffectImage(true);
+        loadEffectImage(updateDisplay);
+        return 0;
     }
 
     const imgWidth = canvas.width;
