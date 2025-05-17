@@ -8,19 +8,6 @@ const DEC_GALACTIC_CENTER = -29.0078; // degrees
 let blackPixelCounts = []; // array of black pixel counts per column of graph
 let imageLoaded = false;
 
-
-function degToRad(degrees) {
-    return degrees * (Math.PI / 180);
-}
-
-function radToDeg(radians) {
-    return radians * (180 / Math.PI);
-}
-
-function normalizeDegrees(degrees) {
-    return (degrees % 360 + 360) % 360;
-}
-
 function decimalHoursToHMS(decimalHours) {
     const h = Math.floor(decimalHours);
     const m = Math.floor((decimalHours - h) * 60);
