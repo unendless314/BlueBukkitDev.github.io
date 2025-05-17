@@ -1,0 +1,16 @@
+# Ignore macOS DS_Store files
+.DS_Store
+images/.DS_Store
+# Node.js dependencies
+node_modules/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Environment variables
+.env
+# Coverage directory
+coverage/
+# Temporary files
+*.tmp
+*.swp
