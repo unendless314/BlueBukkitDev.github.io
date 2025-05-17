@@ -11,19 +11,6 @@ let canvas = null;
 let ctx = null;
 let effectImage = null;
 
-
-function degToRad(degrees) {
-    return degrees * (Math.PI / 180);
-}
-
-function radToDeg(radians) {
-    return radians * (180 / Math.PI);
-}
-
-function normalizeDegrees(degrees) {
-    return (degrees % 360 + 360) % 360;
-}
-
 function decimalHoursToHMS(decimalHours) {
     const h = Math.floor(decimalHours);
     const m = Math.floor((decimalHours - h) * 60);
